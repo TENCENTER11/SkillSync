@@ -1,0 +1,24 @@
+@"
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables / secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Large datasets
+*.zip
+data/raw/
+
+# OS files
+.DS_Store
+Thumbs.db
+"@ | Set-Content .gitignore
