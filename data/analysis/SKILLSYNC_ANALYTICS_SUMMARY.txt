@@ -1,0 +1,73 @@
+SKILLSYNC ANALYTICS SUMMARY
+============================================================
+
+DATASET / ANALYSIS
+------------------------------------------------------------
+Normalized skills: 10581
+Career profiles: 3055
+
+TOP 15 SKILLS
+------------------------------------------------------------
+1. sql - 8.24% demand
+2. analytics - 5.71% demand
+3. python - 5.33% demand
+4. finance - 4.77% demand
+5. java - 4.62% demand
+6. machine learning - 4.13% demand
+7. sas - 4.03% demand
+8. business analysis - 4.0% demand
+9. data analysis - 3.9% demand
+10. digital marketing - 3.57% demand
+11. javascript - 3.39% demand
+12. project management - 3.19% demand
+13. seo - 3.14% demand
+14. data analytics - 2.6% demand
+15. sales - 2.55% demand
+
+TOP 15 CAREER PROFILES
+------------------------------------------------------------
+1. home base job/ data entry/online work/part time work/freelancer work - demand score: 225
+2. business analyst - demand score: 152
+3. data scientist - demand score: 145
+4. digital marketing manager - demand score: 117
+5. data entry/home base job/ online work/part time work/freelancer work - demand score: 105
+6. data analyst - demand score: 104
+7. digital marketing executive - demand score: 90
+8. microsoft advanced analytics - demand score: 89
+9. sas model developer - analytics consulting firm - demand score: 87
+10. program control services - demand score: 87
+11. microsoft modern data platform - demand score: 87
+12. product manager - demand score: 83
+13. sap ui5 fiori development (html5 & java - demand score: 81
+14. senior manager - retail analytics - analytics firm - demand score: 78
+15. seo analyst - demand score: 76
+
+SKILL TRAIT AVERAGES
+------------------------------------------------------------
+big_data: 3.85
+maths_statistics: 4.29
+coding: 4.27
+ai_ml: 4.57
+dashboard_storytelling: 4.36
+
+Strongest overall skill trait: ai_ml
+
+PERSONALITY TRAIT AVERAGES
+------------------------------------------------------------
+neuroticism: 36.19
+extraversion: 43.2
+openness: 41.33
+agreeableness: 44.6
+conscientiousness: 45.21
+
+Strongest overall personality trait: conscientiousness
+
+SUCCESS CLASSIFICATION
+------------------------------------------------------------
+Class 1: 85
+Class 0: 76
+
+IMPORTANT INTERPRETATION
+------------------------------------------------------------
+Career priority scores represent demand/skill-based analytics from the supplied datasets.
+They should not be interpreted as proof that personality traits cause career success.
