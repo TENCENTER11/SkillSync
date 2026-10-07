@@ -7,13 +7,22 @@ from app.matching.matcher import match_skills, calculate_match_score
 from app.matching.career_profiles import CAREER_PROFILES
 
 from app.gaps.gap_engine import generate_skill_gaps
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.recommendation.roadmap import generate_roadmap
 
 app = FastAPI(
     title="SkillSync AI",
     description="AI-powered Career and Talent Intelligence API",
     version="0.1.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
