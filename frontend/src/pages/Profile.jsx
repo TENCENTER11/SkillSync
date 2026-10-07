@@ -1,39 +1,48 @@
 import { useState } from "react";
+
 import {
   ArrowRight,
   Upload,
-  User,
-  GraduationCap,
-  Briefcase,
-  Sparkles
+  Sparkles,
+  FileText
 } from "lucide-react";
 
 function Profile({ onAnalyze }) {
+  const [resume, setResume] = useState(null);
+  const [targetRole, setTargetRole] = useState(
+    "Machine Learning Engineer"
+  );
 
-  const [form, setForm] = useState({
-    name: "",
-    education: "",
-    targetRole: "AI / ML Engineer",
-    skills: "",
-    experience: ""
-  });
+  const [error, setError] = useState("");
 
-  const update = (field, value) => {
-    setForm({
-      ...form,
-      [field]: value
-    });
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      setError("Please upload a PDF resume.");
+      setResume(null);
+      return;
+    }
+
+    setError("");
+    setResume(file);
   };
 
   const submit = (e) => {
     e.preventDefault();
 
+    if (!resume) {
+      setError("Please upload your resume first.");
+      return;
+    }
+
+    setError("");
+
     onAnalyze({
-      ...form,
-      skills: form.skills
-        .split(",")
-        .map((skill) => skill.trim())
-        .filter(Boolean)
+      resume,
+      targetRole,
     });
   };
 
@@ -50,63 +59,28 @@ function Profile({ onAnalyze }) {
         <h1>Tell us about yourself.</h1>
 
         <p>
-          Give SkillSync a little context. Our AI will turn it
-          into your personalized career intelligence profile.
+          Upload your resume and let SkillSync analyze your
+          actual skills and career readiness.
         </p>
 
       </div>
 
-
-      <form className="profile-form" onSubmit={submit}>
-
-        <div className="form-section">
-
-          <div className="form-section-title">
-            <User />
-            <div>
-              <h3>About you</h3>
-              <p>Your basic profile information</p>
-            </div>
-          </div>
-
-          <div className="form-grid">
-
-            <label>
-              Full name
-
-              <input
-                value={form.name}
-                onChange={(e) => update("name", e.target.value)}
-                placeholder="e.g. Alex Sharma"
-                required
-              />
-            </label>
-
-            <label>
-              Education
-
-              <input
-                value={form.education}
-                onChange={(e) =>
-                  update("education", e.target.value)
-                }
-                placeholder="e.g. B.E. Computer Science"
-                required
-              />
-            </label>
-
-          </div>
-
-        </div>
-
+      <form
+        className="profile-form"
+        onSubmit={submit}
+      >
 
         <div className="form-section">
 
           <div className="form-section-title">
-            <Briefcase />
+            <Sparkles />
+
             <div>
               <h3>Career direction</h3>
-              <p>Where do you want your career to go?</p>
+
+              <p>
+                Select the career you want to analyze yourself against.
+              </p>
             </div>
           </div>
 
@@ -114,73 +88,91 @@ function Profile({ onAnalyze }) {
             Target role
 
             <select
-              value={form.targetRole}
+              value={targetRole}
               onChange={(e) =>
-                update("targetRole", e.target.value)
+                setTargetRole(e.target.value)
               }
             >
-              <option>AI / ML Engineer</option>
-              <option>Data Scientist</option>
-              <option>Software Engineer</option>
-              <option>Data Analyst</option>
-              <option>Product Manager</option>
+              <option>
+                Machine Learning Engineer
+              </option>
+
+              <option>
+                Data Scientist
+              </option>
+
+              <option>
+                Backend Developer
+              </option>
+
+              <option>
+                AI Engineer
+              </option>
             </select>
           </label>
 
         </div>
 
-
         <div className="form-section">
 
           <div className="form-section-title">
-            <GraduationCap />
+            <FileText />
+
             <div>
-              <h3>Your skills</h3>
-              <p>Separate multiple skills with commas</p>
+              <h3>Upload your resume</h3>
+
+              <p>
+                SkillSync will extract your actual skills,
+                education, projects and experience.
+              </p>
             </div>
           </div>
 
-          <label>
-            Current skills
+          <div className="resume-upload">
 
-            <input
-              value={form.skills}
-              onChange={(e) =>
-                update("skills", e.target.value)
-              }
-              placeholder="Python, C++, SQL, Machine Learning"
-              required
-            />
-          </label>
+            <div className="upload-icon">
+              <Upload size={22} />
+            </div>
+
+            <div>
+              <h3>
+                {resume
+                  ? resume.name
+                  : "Choose your PDF resume"}
+              </h3>
+
+              <p>
+                {resume
+                  ? `${(resume.size / 1024).toFixed(1)} KB`
+                  : "PDF files only"}
+              </p>
+            </div>
+
+            <label className="upload-button">
+              Choose file
+
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                hidden
+              />
+            </label>
+
+          </div>
 
         </div>
 
-
-        <div className="resume-upload">
-
-          <div className="upload-icon">
-            <Upload size={22} />
+        {error && (
+          <div className="form-error">
+            {error}
           </div>
+        )}
 
-          <div>
-            <h3>Upload your resume</h3>
-            <p>
-              Optional for now — AI resume parsing will connect
-              here later.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            className="upload-button"
-          >
-            Choose file
-          </button>
-
-        </div>
-
-
-        <button className="analyze-button" type="submit">
+        <button
+          className="analyze-button"
+          type="submit"
+        >
           Analyze My Career
           <ArrowRight size={19} />
         </button>
